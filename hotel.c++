@@ -62,4 +62,7 @@ public:
     {
         return mobile_number;
     }
+    void report(){
+        cout << room_number << setw(10) << name << setw(20) << address << setw(20) << mobile_number << setw << endl;
+    }
 };
