@@ -42,4 +42,7 @@ class Hotel{
         cin.ignore();
         cin.getline(mobile_number, 15);
     }
+    int getRoomNumber(){
+        return room_number;
+    }
 };
