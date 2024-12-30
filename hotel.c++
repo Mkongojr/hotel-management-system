@@ -68,3 +68,11 @@ public:
 };
 fstream fp;
 Hotel h;
+
+void save_customer(){
+    system("cls");
+    fp.open("main.dat", ios::out | ios::app);
+    h.add_customer();
+    fp.write((char *)&h, sizeof(Hotel));
+    fp.close();
+}
