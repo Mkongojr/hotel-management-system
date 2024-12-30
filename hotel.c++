@@ -125,5 +125,21 @@ void delete_customer(){
     fstream fp2;
     fp2.open("Temp.dat",ios::out);
     fp.seekg(0, ios::beg);
-    
+    while(fp.read((char*)&h,sizeof(Hotel))){
+        if (h.getRoomNumber()==roomNumber){
+            fp2.write((char *)&h, sizeof(Hotel));
+        }
+        else
+            flag = 1;
+    }
+
+    fp2.close();
+    fp.close();
+    remove("main.dat");
+    rename("temp.dat","main.dat");
+    if(flag==1){
+        cout << "\n\n record deleted...";
+    }
+    else
+        cout << "\n\n record not found..";
 }
