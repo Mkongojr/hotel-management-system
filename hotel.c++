@@ -91,3 +91,17 @@ void display_customer(int roomNumber){
     if(check==0)
         cout << "\n customer does not exist.";
 }
+void modifyCustomer(){
+    system("cls");
+    int roomNumber, found = 0;
+    cout << "\n\n\t modify customers record";
+    cout << "\n\n\t enter the room number";
+    cin >> roomNumber;
+    fp.open("main.dat", ios::in | ios::out);
+    while(fp.read((char *)&h,sizeof(Hotel))&&"found==0"){
+        if(h.getRoomNumber()==roomNumber){
+            h.show_customer();
+            
+        }
+    }
+}
