@@ -76,3 +76,15 @@ void save_customer(){
     fp.write((char *)&h, sizeof(Hotel));
     fp.close();
 }
+void display_customer(int roomNumber){
+    system("cls");
+    cout << "\n customer details\n";
+    int check = 0;
+    fp.open("main.dat", ios::in);
+    while(fp.read((char *)&h,sizeof(Hotel))){
+        if(h.getRoomNumber()==roomNumber){
+            h.show_customer();
+            check = 1;
+        }
+    }
+}
