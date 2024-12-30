@@ -87,4 +87,7 @@ void display_customer(int roomNumber){
             check = 1;
         }
     }
+    fp.close();
+    if(check==0)
+        cout << "\n customer does not exist.";
 }
