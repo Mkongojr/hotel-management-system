@@ -48,4 +48,7 @@ class Hotel{
     char *getName(){
         return name;
     }
+    char *getAddress(){
+        return address;
+    }
 };
