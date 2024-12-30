@@ -101,7 +101,13 @@ void modifyCustomer(){
     while(fp.read((char *)&h,sizeof(Hotel))&&"found==0"){
         if(h.getRoomNumber()==roomNumber){
             h.show_customer();
-            
+            cout << "\n enter customers new information" << endl;
+            h.modify_customer_record();
+            long long unsigned int pos = -1 * sizeof(h);
+            fp.seekp(pos, ios::cur);
+            fp.write((char *)&h, sizeof(Hotel));
+            cout << "\n\n\t record updated successful...";
+            found = 1;
         }
     }
 }
