@@ -110,4 +110,7 @@ void modifyCustomer(){
             found = 1;
         }
     }
+    fp.close();
+    if(found==0)
+        cout << "\n\n record not found";
 }
