@@ -62,44 +62,52 @@ public:
     {
         return mobile_number;
     }
-    void report(){
+    void report()
+    {
         cout << room_number << setw(10) << name << setw(20) << address << setw(20) << mobile_number << setw << endl;
     }
 };
 fstream fp;
 Hotel h;
 
-void save_customer(){
+void save_customer()
+{
     system("cls");
     fp.open("main.dat", ios::out | ios::app);
     h.add_customer();
     fp.write((char *)&h, sizeof(Hotel));
     fp.close();
 }
-void display_customer(int roomNumber){
+void display_customer(int roomNumber)
+{
     system("cls");
     cout << "\n customer details\n";
     int check = 0;
     fp.open("main.dat", ios::in);
-    while(fp.read((char *)&h,sizeof(Hotel))){
-        if(h.getRoomNumber()==roomNumber){
+    while (fp.read((char *)&h, sizeof(Hotel)))
+    {
+        if (h.getRoomNumber() == roomNumber)
+        {
             h.show_customer();
             check = 1;
         }
     }
     fp.close();
-    if(check==0)
+    if (check == 0)
         cout << "\n customer does not exist.";
 }
-void modifyCustomer(){
+void modifyCustomer()
+{
     system("cls");
     int roomNumber, found = 0;
     cout << "\n\n\t modify customers record";
     cout << "\n\n\t enter the room number";
     cin >> roomNumber;
     fp.open("main.dat", ios::in | ios::out);
-    while(fp.read((char *)&h,sizeof(Hotel))&&"found==0"){
-        if(h.getRoomNumber()==roomNumber){
+    while (fp.read((char *)&h, sizeof(Hotel)) && "found==0")
+    {
+        if (h.getRoomNumber() == roomNumber)
+        {
             h.show_customer();
             cout << "\n enter customers new information" << endl;
             h.modify_customer_record();
@@ -111,10 +119,11 @@ void modifyCustomer(){
         }
     }
     fp.close();
-    if(found==0)
+    if (found == 0)
         cout << "\n\n record not found";
 }
-void delete_customer(){
+void delete_customer()
+{
     system("cls");
     char roomNumber;
     int flag = 0;
@@ -123,10 +132,12 @@ void delete_customer(){
     cin >> roomNumber;
     fp.open("main.dat", ios::in | ios::out);
     fstream fp2;
-    fp2.open("Temp.dat",ios::out);
+    fp2.open("Temp.dat", ios::out);
     fp.seekg(0, ios::beg);
-    while(fp.read((char*)&h,sizeof(Hotel))){
-        if (h.getRoomNumber()==roomNumber){
+    while (fp.read((char *)&h, sizeof(Hotel)))
+    {
+        if (h.getRoomNumber() == roomNumber)
+        {
             fp2.write((char *)&h, sizeof(Hotel));
         }
         else
@@ -136,10 +147,60 @@ void delete_customer(){
     fp2.close();
     fp.close();
     remove("main.dat");
-    rename("temp.dat","main.dat");
-    if(flag==1){
+    rename("temp.dat", "main.dat");
+    if (flag == 1)
+    {
         cout << "\n\n record deleted...";
     }
     else
         cout << "\n\n record not found..";
+}
+int main()
+{
+    int ch;
+    for (;;)
+    {
+        cout << "\n\n ......................";
+        cout << "\n\t\t press 1 to book a room";
+        cout << "\n\t\t press 2 to view customers record";
+        cout << "\n\t\t press 3 to modify customers record";
+        cout << "\n\t\t press 4 to delete customers record";
+        cout << "\n\t\t press 5 to exit";
+        cout << "\n\t\t............";
+        cout << "\n enter your choice= ";
+        cin >> ch;
+
+        switch (ch)
+        {
+        case 1:
+            save_customer();
+            system("cls");
+            break;
+
+        case 2:
+            int RoomNumber;
+            system("cls");
+            cout << "\n\n\t please enter customers room number";
+            cin >> RoomNumber;
+            display_customer(RoomNumber);
+            break;
+
+        case 3:
+            modifyCustomer();
+            system("cls");
+            break;
+
+        case 4:
+            delete_customer();
+            system("cls");
+            break;
+
+        case 5:
+            exit(0);
+
+        default:
+            cout << "\n\n enter the correct choice: ";
+        }
+    }
+    return 0;
 }
