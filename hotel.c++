@@ -45,4 +45,7 @@ class Hotel{
     int getRoomNumber(){
         return room_number;
     }
+    char *getName(){
+        return name;
+    }
 };
